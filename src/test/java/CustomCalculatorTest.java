@@ -2,6 +2,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -14,7 +15,7 @@ public class CustomCalculatorTest {
     public void add() {
         customCalculator = new CustomCalculator();
         int result = customCalculator.add(10,15);
-        /* 이곳에 테스트 코드를 작성하세요. */
+        assertThat(result, is(25));                                //최지원
         System.out.println("result :: " + result);
     }
 
@@ -23,7 +24,7 @@ public class CustomCalculatorTest {
     public void subtract() {
         customCalculator = new CustomCalculator();
         int result = customCalculator.subtract(23,10);
-        /* 이곳에 테스트 코드를 작성하세요. */
+        assertThat(result, equalTo(13));                        //최지원
         System.out.println("result :: " + result);
     }
 
@@ -32,16 +33,15 @@ public class CustomCalculatorTest {
     public void multiply() {
         customCalculator = new CustomCalculator();
         int result = customCalculator.multiply(5,9);
-        /* 이곳에 테스트 코드를 작성하세요. */
+        assertSame(result, 45);                                   //최지원
         System.out.println("result :: " + result);
     }
 
     //나누기 테스트 작성
-    @Test
+    @Test(expected = ArithmeticException.class)                                 //최지원
     public void divide() {
         customCalculator = new CustomCalculator();
-        int result = customCalculator.divide(25,5);
-        /* 이곳에 테스트 코드를 작성하세요. */
+        int result = customCalculator.divide(25,0);                             //최지원
         System.out.println("result :: " + result);
     }
 }
