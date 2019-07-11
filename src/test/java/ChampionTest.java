@@ -149,7 +149,17 @@ public class ChampionTest {
         assertThat(champName, is("다리우스"));
     }
 
-   
+    //리신은 정글 챔피언 이어야 한다는 조건으로 테스트 코드 작성
+    @Test
+    public void shouldJungleIsLeeSin(){
+        Optional<Champion> filtered = championList.stream()
+                .filter(c->c.getName().equals("리신"))
+                .findFirst();
+        System.out.println("result ::"+filtered);
+        String champPos=filtered.get().getPosition();
+        assertThat(champPos, is("정글"));
+
+    } //최진영
 
 
 }
