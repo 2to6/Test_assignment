@@ -1,9 +1,15 @@
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.StartsWith;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class ChampionTest {
     private List<Champion> championList = new ArrayList<Champion>();
@@ -30,6 +36,7 @@ public class ChampionTest {
     @Test
     public void givenCollectionWhenEmptyCorrect() {
         List<String> emptyList = new ArrayList<>();
+        assertThat(emptyList,empty()); // 이안규
 //        assertThat(emptyList, empty());
     }
 
@@ -37,6 +44,7 @@ public class ChampionTest {
     @Test
     public void notNullCheck() {
         String lck = "LCK";
+        assertThat(lck,is("LCK")); //이안규
 //        assertThat(lck, notNullValue());
     }
 
@@ -44,6 +52,7 @@ public class ChampionTest {
     @Test
     public void givenStringWhenNullIsCorrect() {
         String lck = null;
+        assertThat(lck,isEmptyOrNullString()); //이안규
 //        assertThat(lck, nullValue());
     }
 
@@ -55,6 +64,7 @@ public class ChampionTest {
         String sampleString2 = "Player point";
         String startString = "Player";
         String endString = "point";
+        assertThat(sampleString1,allOf(startsWith("Pla"),endsWith("cus"))); //이안규
 //        assertThat(sampleString1, anyOf(startsWith(startString), containsString(endString)));
 //        assertThat(sampleString2, is(endsWith(endString)));
     }
@@ -62,18 +72,21 @@ public class ChampionTest {
     //부동소수점 범위 closeTo 테스트
     @Test
     public void testForFloatingPoint() {
+        assertThat(3.25,closeTo(3.1,0.2)); //이안규
 //        assertThat(3.14, closeTo(3, 0.2));
     }
 
     //anything 테스트
     @Test
     public void shouldNotErrorGetReference() {
+        assertThat(championList.get(2),anything()); //이안규
 //        assertThat(championList.get(2), anything());
     }
 
     //객체 크기 검증 테스트 hasSize
     @Test
     public void shouldChampionCountFive() {
+        assertThat(championList.size(), is(5)); //이안규
 //        assertTrue(championList.size() == 5);
 //        assertThat(championList.size(), is(5));
 //        assertThat(championList, hasSize(5));
@@ -83,6 +96,7 @@ public class ChampionTest {
     @Test
     public void shouldSupportChampionIsTaric() {
         Champion supportChamp = new Champion("타릭", "바텀");
+        assertThat("바텀",is(supportChamp.getPosition())); //이안규
 //        assertThat("타릭", is(supportChamp.getName()));
 //        assertThat("타릭", is(equalTo(supportChamp.getName())));
 //        assertThat("타릭", equalTo(supportChamp.getName()));
@@ -91,6 +105,7 @@ public class ChampionTest {
     //hasProperty 활용하여 속성이 포함되어 있는지 테스트
     @Test
     public void shouldHasPropertyPosition() {
+        assertThat(championList.get(1),hasProperty("position",equalTo("정글"))); //이안규
 //        assertThat(championList.get(0), hasProperty("position"));
 //        assertThat(championList.get(0), hasProperty("position", equalTo("탑")));
     }
@@ -99,6 +114,7 @@ public class ChampionTest {
     @Test
     public void shouldHaveSomeChampName() {
         List<String> champListNames = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가느", "블라디미르");
+        assertThat(champListNames.get(1),hasToString("애쉬")); //이안규
 //        assertThat(champListNames.get(0), hasToString("루시안"));
     }
 
@@ -107,12 +123,19 @@ public class ChampionTest {
     public void shouldHaveSamePropertyAndValue() {
         List<String> championNames1 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
         List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
+        assertThat(championNames1,samePropertyValuesAs(championNames2)); //이안규
 //        assertThat(championNames1, samePropertyValuesAs(championNames2));
     }
 
     //탑 챔피언은 다리우스여야 한다라는 조건으로 테스트 코드 작성, stream 활용예
     @Test
     public void shouldTopChampionIsDarius() {
+        Optional<Champion> filterChampion = championList.stream()
+                .filter(c -> c.getPosition().equals("미드"))
+                .findFirst();
+        System.out.println("result :: " + filterChampion);
+        String champName = filterChampion.get().getName();
+        assertThat(champName,is("르블랑")); //이안규
 //        Optional<Champion> filterdChampion = championList.stream()
 //                .filter(c -> c.getPosition().equals("탑"))
 //                .findFirst();
