@@ -55,7 +55,7 @@ public class CustomCalculatorTest {
     //나누기 테스트 작성
     @Test(expected = ArithmeticException.class)                                 //최지원
     public void divide() {
-        customCalculator = new CustomCalculator()
+        customCalculator = new CustomCalculator();
         int result = customCalculator.divide(25,5);
         assertFalse(result != 5); //김도연
         assertTrue(result==5); //최진영

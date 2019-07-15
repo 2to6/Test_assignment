@@ -20,8 +20,8 @@ public class UpperCaseCounterTest {
         assertTrue(numberOfUpperCaseCharactersInString==0); //최진영
         System.out.println("result" + numberOfUpperCaseCharactersInString);
         assertTrue(numberOfUpperCaseCharactersInString == 0); //원동욱
-        numberOfUpperCaseCharactersInstring = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
-        assertThat(numberOfUpperCaseCharactersInstring, is(0));                     //최지원
+        numberOfUpperCaseCharactersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
+        assertThat(numberOfUpperCaseCharactersInString, is(0));                     //최지원
         assertThat(numberOfUpperCaseCharactersInString,is(0)); //이안규
 }
     //반겂울 전달했을 때 0을 리턴하는지에 대한 테스트 작성
@@ -30,13 +30,13 @@ public class UpperCaseCounterTest {
         String str = "";
         int numberOfUpperCaseCharactersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
         assertFalse(numberOfUpperCaseCharactersInString==1); //김도연
-        int numberOfUpperCaseCharactersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
+        numberOfUpperCaseCharactersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
 
         assertTrue(numberOfUpperCaseCharactersInString==0); //최진영
 
-        int numberOfUpperCaseChartersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
+        numberOfUpperCaseCharactersInString = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
         assertTrue(numberOfUpperCaseCharactersInString == 0); //원동욱
-        assertThat(numberOfUpperCaseChartersInString,is(0)); //이안규
+        assertThat(numberOfUpperCaseCharactersInString,is(0)); //이안규
         assertThat(numberOfUpperCaseCharactersInString, equalTo(0));               //최지원
     }
 
@@ -84,7 +84,7 @@ public class UpperCaseCounterTest {
     //두번째로 해당 메소드는 테스트 하지 않도록 어노테이션 추가 적용 해봅니다. Ignore
     @Test(timeout = 4000)
     public void testShouldRunInLimitedTimeWDU() throws InterruptedException {  //원동욱
-
+    }
     //@Test(expected = IndexOutOfBoundsException.class) //***********이안규********
     @Test(expected = IndexOutOfBoundsException.class)       //최지원
     public void shouldThrowExceptionWhenGetZeroIndex() {
@@ -101,5 +101,5 @@ public class UpperCaseCounterTest {
 
         Thread.sleep(4000);
         System.out.println("제한된 시간 내에 수행되면 테스트 Passed!");
-        }
-        }
+    }
+}

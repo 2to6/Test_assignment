@@ -22,9 +22,7 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertTrue;
-import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
@@ -152,7 +150,7 @@ public class ChampionTest {
     public void shouldNotErrorGetReference() {
         assertThat(championList.get(1).getName(), anything()); //김도연
         assertThat(championList.get(3).getPosition(), anything()); //김도연
-      assertThat(championList.get(2), anything()); //최진영
+        assertThat(championList.get(2), anything()); //최진영
         Champion whoareyou = championList.get(2);
         assertThat(championList.get(2), anything()); //원동욱
         assertThat(championList.get(2), is(whoareyou)); //원동욱
@@ -167,7 +165,7 @@ public class ChampionTest {
     @Test
     public void shouldChampionCountFive() {
         assertFalse(championList.size() != 5); //김도연
-       assertTrue(championList.size() == 5); //최진영
+        assertTrue(championList.size() == 5); //최진영
         assertThat(championList.size(), is(5)); //최진영
         assertThat(championList, hasSize(5)); //최진영
         assertTrue(championList.size() == 5); //원동욱
@@ -176,7 +174,7 @@ public class ChampionTest {
         assertThat(championList.size(), is(5)); //이안규
         assertThat(championList.size(), equalTo(5));                   //최지원
         assertThat(championList, hasSize(5));                                    //최지원
-        assertThat(championList, is(5));                                  //최지원
+        assertThat(championList.size(), is(5));                                  //최지원
     }
 
     //서폿 챔피언은 타릭이어야 한다라는 조건으로 테스트 코드 작성
@@ -186,14 +184,14 @@ public class ChampionTest {
         assertThat("타릭", is(supportChamp.getName()));  //원동욱
         assertThat("타릭", is(equalTo(supportChamp.getName()))); //원동욱
         assertThat("타릭", equalTo(supportChamp.getName())); //원동욱
-        Champion supportChamp = new Champion("타릭", "바텀");
+        supportChamp = new Champion("타릭", "바텀");
         assertFalse("타릭" != supportChamp.getName()); //김도연
         assertThat("타릭", is(supportChamp.getName())); //최진영
         assertThat("타릭", is(equalTo(supportChamp.getName()))); //최진영
         assertThat("타릭", equalTo(supportChamp.getName())); //최진영
         assertTrue(supportChamp.getName()=="타릭"); //최진영
         assertThat("바텀",is(supportChamp.getPosition())); //이안규
-        Champion supportChamp = new Champion("타릭", "바텀");   //최지원
+        supportChamp = new Champion("타릭", "바텀");   //최지원
         assertThat(supportChamp.getName(), equalTo("타릭"));           //최지원
         assertThat(supportChamp.getName(), containsString("타릭"));   //최지원
         assertThat("타릭", is(equalTo(supportChamp.getName())));         //최지원
@@ -204,16 +202,16 @@ public class ChampionTest {
     @Test
     public void shouldHasPropertyPosition() {
         assertThat(championList.get(1), hasProperty("name")); //김도연
-       assertThat(championList.get(0), hasProperty("position"));//최진영
-       assertThat(championList.get(0), hasProperty("position", equalTo("탑")));//최진영
-       assertThat(championList.get(1), hasProperty("name", equalTo("리신"))); //최진영
+        assertThat(championList.get(0), hasProperty("position"));//최진영
+        assertThat(championList.get(0), hasProperty("position", equalTo("탑")));//최진영
+        assertThat(championList.get(1), hasProperty("name", equalTo("리신"))); //최진영
         assertThat(championList.get(1), allOf(hasProperty("position"),hasProperty("name"))); //최진영
         assertThat(championList.get(0), hasProperty("position", equalTo("탑"))); //원동욱
         assertThat(championList.get(0), hasProperty("name")); //원동욱
         assertThat(championList.get(1),hasProperty("position",equalTo("정글"))); //이안규
         assertThat(championList.get(0),hasProperty("position"));    //최지원
         assertThat(championList.get(4),hasProperty("name"));        //최지원
-        assertThat(championList.get(2),hasProperty("postion",equalTo("미드")));   //최지원
+        assertThat(championList.get(2),hasProperty("position",equalTo("미드")));   //최지원
     }
 
     //hasToString 활용 테스트
@@ -242,10 +240,8 @@ public class ChampionTest {
         List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미"); //원동욱
         assertThat(championNames1,samePropertyValuesAs(championNames2)); //원동욱
         // 두 객체의 프로퍼티값이 같은지
-        List<String> championNames1 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
-        List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
-        assertFalse(!championNames1.equals(championNames2)); //김도연
-       assertThat(championNames1, samePropertyValuesAs(championNames2)); //최진영
+        assertFalse(championNames1.equals(championNames2)); //김도연
+        assertThat(championNames1, samePropertyValuesAs(championNames2)); //최진영
         assertThat(championNames1,samePropertyValuesAs(championNames2)); //이안규
         List<String> championNames3 = Arrays.asList("리신", " 다리우스", "문도");                                     //최지원
         assertThat(championNames1, samePropertyValuesAs(championNames3));                                             //최지원
@@ -266,34 +262,30 @@ public class ChampionTest {
         assertTrue(champName.equals("다리우스")); //원동욱
         assertThat("다리우스", is(champName)); //원동욱
         
-        filterChampion = championList.stream()
+        filterdChampion = championList.stream()
                 .filter(c -> c.getPosition().equals("미드"))
                 .findFirst();
-        System.out.println("result :: " + filterChampion);
-        String champName = filterChampion.get().getName();
+        System.out.println("result :: " + filterdChampion);
+        champName = filterdChampion.get().getName();
         assertThat(champName,is("르블랑")); //이안규
 
-        filteredChampion = championList.stream()
+        filterdChampion = championList.stream()
                 .filter(c->c.getPosition().equals("바텀"))
                 .findAny();
-        System.out.println("필터링 된 챔피언::" + filteredChampion);
-        String champName = filteredChampion.get().getName();
+        System.out.println("필터링 된 챔피언::" + filterdChampion);
+        champName = filterdChampion.get().getName();
         System.out.println("ChampName::" + champName);
         assertThat(champName,anyOf(equalTo("리신"), equalTo("베인")));              //최지원
         assertThat(champName, isOneOf("리신","베인"));                                      //최지원
-    }
 
-//리신은 정글 챔피언 이어야 한다는 조건으로 테스트 코드 작성
-    @Test
-    public void shouldJungleIsLeeSin(){ /*최진영*/
-        Optional<Champion> filtered = championList.stream()
+        filterdChampion = championList.stream()
                 .filter(c->c.getName().equals("리신"))
                 .findFirst();
-        System.out.println("result ::"+filtered);
-        String champPos=filtered.get().getPosition();
-        assertThat(champPos, is("정글"));
+        System.out.println("result ::"+filterdChampion);
+        champName = filterdChampion.get().getPosition(); //최진영
+        assertThat(champName, is("정글")); //최진영
+    }
 
-    } //최진영
 
 
     @Test
