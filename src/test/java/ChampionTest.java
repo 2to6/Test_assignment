@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+
+
+import static org.junit.Assert.assertEquals;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -51,35 +54,46 @@ public class ChampionTest {
     @Test
     public void givenCollectionWhenEmptyCorrect() {
         List<String> emptyList = new ArrayList<>();
+
+        assertThat(emptyList, empty()); //최진영
+        assertThat(emptyList,is(empty())); //최진영
         assertThat(emptyList, empty()); //원동욱
         assertThat(emptyList,empty()); // 이안규
         assertThat(emptyList.isEmpty(), is(true));  //최지원
         assertThat(emptyList.size(), is(0));        //최지원
         assertThat(emptyList, is(empty()));                //최지원
         assertThat(emptyList, empty());                    //최지원
+
     }
 
     //notNullValue 활용한 테스트
     @Test
     public void notNullCheck() {
         String lck = "LCK";
+
+        assertThat(lck, notNullValue()); //최진영
         assertThat(lck, notNullValue()); //원동욱
         assertThat(lck,is("LCK")); //이안규
         assertNotNull(lck);                                 //최지원
         assertThat(lck, notNullValue());                    //최지원
         assertThat(lck, is(notNullValue()));                //최지원
         assertThat(lck, not(nullValue()));                  //최지원
+
     }
 
     //nullValue 활용한 테스트
     @Test
     public void givenStringWhenNullIsCorrect() {
         String lck = null;
+
+        assertThat(lck, nullValue()); //최진영
+        assertEquals(null,lck); //최진영
         assertThat(lck, nullValue()); //원동욱
         assertThat(lck,isEmptyOrNullString()); //이안규
         assertThat(lck,nullValue());                        //최지원
         assertThat(lck,is(nullValue()));                    //최지원
         assertThat(lck,not(notNullValue()));                //최지원
+
     }
 
 
@@ -98,6 +112,13 @@ public class ChampionTest {
         String startString = "Player";
         String endString = "point";
 
+        assertThat(sampleString1, containsString("Player")); //최진영
+        assertThat(sampleString1, is(endsWith("Focus"))); //최진영
+        assertThat(sampleString1, anyOf(startsWith(startString), containsString(endString))); //최진영
+        assertThat(sampleString2, allOf(startsWith("Player"),endsWith("point"))); //최진영
+        assertThat(sampleString2, anyOf(containsString("Player"), containsString("Focus"), containsString("point"))); //최진영
+        assertThat(sampleString2, is(containsString("Player"))); //최진영
+        assertThat(sampleString2, containsString("Player")); //최진영
         assertThat(sampleString1, anyOf(startsWith("Player"), containsString("Focus"))); //원동욱
         assertThat(sampleString1, anyOf(startsWith(startString), containsString(endString))); //원동욱
         assertThat(sampleString2, allOf(startsWith(startString), containsString(endString))); //원동욱
@@ -110,12 +131,14 @@ public class ChampionTest {
         assertThat(sampleString3, endsWith(endString));                                       //최지원
         assertThat(sampleString3, equalToIgnoringCase("player focus and point"));//최지원
         assertThat(sampleString3, equalToIgnoringWhiteSpace("    Player    Focus    and    point"));//최지원
+
     }
 
     //부동소수점 범위 closeTo 테스트
     @Test
     public void testForFloatingPoint() {
 
+       assertThat(3.14, closeTo(3, 0.2)); //최진영
         assertThat(3.14, closeTo(3,0.2)); //(실제값, (기준,오차범위)) //원동욱
         assertThat(3.25,closeTo(3.1,0.2)); //이안규
         assertThat(3.14, closeTo(3.2,0.5));             //최지원
@@ -130,6 +153,8 @@ public class ChampionTest {
     //anything 테스트
     @Test
     public void shouldNotErrorGetReference() {
+
+      assertThat(championList.get(2), anything()); //최진영
         Champion whoareyou = championList.get(2);
         assertThat(championList.get(2), anything()); //원동욱
         assertThat(championList.get(2), is(whoareyou)); //원동욱
@@ -138,11 +163,16 @@ public class ChampionTest {
         assertThat(champList, anything());                                      //최지원
         assertThat(championList.get(3), anything());                            //최지원
         assertThat(championList.get(2),anything("name"));           //최지원
+
     }
 
     //객체 크기 검증 테스트 hasSize
     @Test
     public void shouldChampionCountFive() {
+
+       assertTrue(championList.size() == 5); //최진영
+        assertThat(championList.size(), is(5)); //최진영
+        assertThat(championList, hasSize(5)); //최진영
         assertTrue(championList.size() == 5); //원동욱
         assertThat(championList.size(), is(5)); //원동욱
         assertThat(championList, hasSize(5)); //hasSize는 아얘 List자체를 던져주면 알아서 사이즈를 계산
@@ -150,6 +180,7 @@ public class ChampionTest {
         assertThat(championList.size(), equalTo(5));                   //최지원
         assertThat(championList, hasSize(5));                                    //최지원
         assertThat(championList, is(5));                                  //최지원
+
     }
 
     //서폿 챔피언은 타릭이어야 한다라는 조건으로 테스트 코드 작성
@@ -160,23 +191,35 @@ public class ChampionTest {
         assertThat("타릭", is(equalTo(supportChamp.getName()))); //원동욱
         assertThat("타릭", equalTo(supportChamp.getName())); //원동욱
         Champion supportChamp = new Champion("타릭", "바텀");
+
+        assertThat("타릭", is(supportChamp.getName())); //최진영
+        assertThat("타릭", is(equalTo(supportChamp.getName()))); //최진영
+        assertThat("타릭", equalTo(supportChamp.getName())); //최진영
+        assertTrue(supportChamp.getName()=="타릭"); //최진영
         assertThat("바텀",is(supportChamp.getPosition())); //이안규
         Champion supportChamp = new Champion("타릭", "바텀");   //최지원
         assertThat(supportChamp.getName(), equalTo("타릭"));           //최지원
         assertThat(supportChamp.getName(), containsString("타릭"));   //최지원
         assertThat("타릭", is(equalTo(supportChamp.getName())));         //최지원
         assertThat(supportChamp.getName(),is("타릭"));                    //최지원
+
     }
 
     //hasProperty 활용하여 속성이 포함되어 있는지 테스트
     @Test
     public void shouldHasPropertyPosition() {
+
+       assertThat(championList.get(0), hasProperty("position"));//최진영
+       assertThat(championList.get(0), hasProperty("position", equalTo("탑")));//최진영
+       assertThat(championList.get(1), hasProperty("name", equalTo("리신"))); //최진영
+        assertThat(championList.get(1), allOf(hasProperty("position"),hasProperty("name"))); //최진영
         assertThat(championList.get(0), hasProperty("position", equalTo("탑"))); //원동욱
         assertThat(championList.get(0), hasProperty("name")); //원동욱
         assertThat(championList.get(1),hasProperty("position",equalTo("정글"))); //이안규
         assertThat(championList.get(0),hasProperty("position"));    //최지원
         assertThat(championList.get(4),hasProperty("name"));        //최지원
         assertThat(championList.get(2),hasProperty("postion",equalTo("미드")));   //최지원
+
     }
 
     //hasToString 활용 테스트
@@ -185,12 +228,19 @@ public class ChampionTest {
         List<String> FavoriteChampListNames = Arrays.asList("조이", "티모", "아이번", "징크스", "카밀"); //원동욱
         assertThat(FavoriteChampListNames.get(0), hasToString("조이")); //원동욱
         List<String> champListNames = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가느", "블라디미르");
+
+       assertThat(champListNames.get(0), hasToString("루시안")); //최진영
+
+        List<String> iLikeChamoNames = Arrays.asList("조이","티모","아이번","징크스","카밀"); //최진영
+        assertThat(iLikeChamoNames.get(3), hasToString("징크스")); //최진영
+
         assertThat(champListNames.get(1),hasToString("애쉬")); //이안규
         champListNames = Arrays.asList("조이", "티모", "아이번", "애쉬", "징크스", "카밀");  //최지원
         assertThat(champListNames.get(3), hasToString("애쉬"));           //최지원
         assertThat(champListNames.get(3), containsString("애"));                 //최지원
         assertThat(champListNames, hasItem("애쉬"));                                       //최지원
         assertThat(champListNames, hasItem(hasToString("애쉬")));         //최지원
+
     }
 
     //property와 value가 같은지 테스트
@@ -202,6 +252,8 @@ public class ChampionTest {
         // 두 객체의 프로퍼티값이 같은지
         List<String> championNames1 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
         List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
+
+       assertThat(championNames1, samePropertyValuesAs(championNames2)); //최진영
         assertThat(championNames1,samePropertyValuesAs(championNames2)); //이안규
         List<String> championNames3 = Arrays.asList("리신", " 다리우스", "문도");                                     //최지원
         assertThat(championNames1, samePropertyValuesAs(championNames3));                                             //최지원
@@ -210,10 +262,10 @@ public class ChampionTest {
     }
 
 
-
     //탑 챔피언은 다리우스여야 한다라는 조건으로 테스트 코드 작성, stream 활용예
     @Test
     public void shouldTopChampionIsDarius() {
+        
         Optional<Champion> filterdChampion = championList.stream()
                 .filter(c -> c.getPosition().equals("탑"))
                 .findFirst(); //원하는 값만 필터링해서 값을 뽑아낼 수 있다.
@@ -239,6 +291,18 @@ public class ChampionTest {
         assertThat(champName, isOneOf("리신","베인"));                                      //최지원
     }
 
+//리신은 정글 챔피언 이어야 한다는 조건으로 테스트 코드 작성
+    @Test
+    public void shouldJungleIsLeeSin(){ /*최진영*/
+        Optional<Champion> filtered = championList.stream()
+                .filter(c->c.getName().equals("리신"))
+                .findFirst();
+        System.out.println("result ::"+filtered);
+        String champPos=filtered.get().getPosition();
+        assertThat(champPos, is("정글"));
+
+    } //최진영
+
 
     @Test
     public void shouldSameInstance(){ //원동욱
@@ -255,4 +319,5 @@ public class ChampionTest {
         assertThat(championList.get(2).getPosition(), equalToIgnoringWhiteSpace("      미드       ")); //원동욱
         //문자열의 앞뒤의 공백만을 무시한다.
     }
+
 }
