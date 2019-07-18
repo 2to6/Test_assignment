@@ -5,7 +5,7 @@
 
 총 5명
 
-## 사용된 Dependencies와 API
+## 사용된 Dependencies & APIs
 - Junit : version 4.12
 - Hamcrest : version 1.3
 - Lombok : version 1.16.10
